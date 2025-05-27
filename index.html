@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-TF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABO第30篇— Cochrane手術加速矯正治療</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Visualization & Content Choices:
+        - 總覽 (Overview): Text summary. Goal: Provide context and main purpose.
+        - 研究方法 (Methods): Bulleted text summary. Goal: Establish credibility and transparency.
+        - 主要發現 - 牙齒移動速率 (Rate of Tooth Movement - 1 & 3 months): Chart.js horizontal bar charts. Goal: Compare, Inform. Interaction: Tooltips for CI. Justification: Clear visual comparison of pooled estimates for the primary surrogate outcome. Library: Chart.js (Canvas).
+        - 主要發現 - 潛在風險與副作用 (Harms & Side Effects): Bulleted text. Goal: Inform about safety aspects. Justification: Concise presentation of qualitative findings.
+        - 主要發現 - 證據品質 (Quality of Evidence): Text summary. Goal: Inform, Temper expectations. Justification: Provide critical context for interpreting results.
+        - 結論與建議 (Conclusions & Implications): Bulleted text. Goal: Summarize key takeaways for practice and research.
+        - 詞彙表 (Glossary): HTML list/table. Goal: Define key terms for better understanding. Interaction: Potentially collapsible sections if long.
+        - 練習測驗 (Practice Quiz): Multiple choice questions. Goal: Reinforce learning. Interaction: Show/hide answers.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px; /* Adjusted for potentially wider labels */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .section-title {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700;
+            color: #0D9488; /* text-teal-600 */
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .content-box {
+            background-color: white;
+            padding: 1.5rem; /* p-6 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+            margin-bottom: 2rem; /* mb-8 */
+        }
+        nav a {
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #0D9488; /* text-teal-600 */
+        }
+        .stat-card {
+            background-color: #F0FDFA; /* teal-50 */
+            border-left: 4px solid #14B8A6; /* border-teal-500 */
+            padding: 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+        }
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+        .quiz-option {
+            display: block;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0; /* slate-200 */
+            border-radius: 0.375rem; /* rounded-md */
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .quiz-option:hover {
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .quiz-answer {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: #ccfbf1; /* teal-100 */
+            border: 1px solid #5eead4; /* teal-300 */
+            border-radius: 0.375rem; /* rounded-md */
+            color: #0f766e; /* teal-700 */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
+            <div class="text-2xl font-bold text-teal-700">ABO第30篇— Cochrane手術加速矯正治療</div>
+            <button id="nav-toggle" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+            <ul id="nav-menu" class="md:flex space-x-0 md:space-x-6 hidden md:block w-full md:w-auto mt-2 md:mt-0">
+                <li><a href="#overview" class="block py-2 md:py-0 hover:text-teal-600">總覽</a></li>
+                <li><a href="#methods" class="block py-2 md:py-0 hover:text-teal-600">研究方法</a></li>
+                <li><a href="#findings" class="block py-2 md:py-0 hover:text-teal-600">主要發現</a></li>
+                <li><a href="#conclusions" class="block py-2 md:py-0 hover:text-teal-600">結論與建議</a></li>
+                <li><a href="#glossary" class="block py-2 md:py-0 hover:text-teal-600">詞彙表</a></li>
+                <li><a href="#quiz" class="block py-2 md:py-0 hover:text-teal-600">練習測驗</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+
+        <section id="overview" class="pt-16 -mt-16">
+            <h2 class="section-title">總覽</h2>
+            <div class="content-box text-lg">
+                <p class="mb-4">矯正治療（例如牙套）通常耗時較長，一般需要18至24個月。縮短治療時間對患者和臨床醫師而言都非常重要，可以減少不便、降低潛在風險（如牙根吸收、脫鈣）。</p>
+                <p class="mb-4">近年來，多種外科輔助程序被提出用於加速矯正牙齒移動。本互動報告總結了一篇 Cochrane 系統性文獻回顧 (Fleming PS et al., 2015) 的結果，該回顧旨在評估這些外科輔助程序在加速矯正治療方面的效果與安全性。</p>
+                <p>本報告將引導您了解該文獻回顧的研究方法、主要發現（包括牙齒移動速率的變化、潛在風險）以及對臨床實踐和未來研究的啟示。</p>
+            </div>
+        </section>
+
+        <section id="methods" class="pt-16 -mt-16">
+            <h2 class="section-title">研究方法</h2>
+            <div class="content-box">
+                <p class="mb-4 text-lg">這篇 Cochrane 系統性文獻回顧採用了嚴謹的方法來收集和分析相關研究證據：</p>
+                <ul class="list-disc list-inside space-y-2 text-base">
+                    <li><strong>文獻搜尋：</strong> 研究者全面搜尋了多個醫學電子資料庫（如 Cochrane 口腔健康組試驗註冊庫、CENTRAL、MEDLINE、EMBASE 等）以及臨床試驗註冊平台，搜尋截至2014年9月10日，無語言或出版日期限制。</li>
+                    <li><strong>研究選擇標準：</strong> 僅納入隨機對照試驗 (RCTs)，比較了「固定矯正器治療 + 外科輔助程序」與「僅固定矯正器治療」的效果。排除了涉及正顎手術或顱顏畸形患者的研究。</li>
+                    <li><strong>資料收集與分析：</strong> 至少兩位作者獨立評估研究資格、提取數據並評估偏倚風險。主要關注的結果包括治療總時長（主要結果），以及牙齒移動速率、不良反應、患者報告結果等（次要結果）。</li>
+                    <li><strong>偏倚風險評估：</strong> 使用 Cochrane 工具評估納入研究的偏倚風險。</li>
+                </ul>
+                <p class="mt-4 text-sm text-slate-600">本回顧最終納入了4項隨機對照試驗，共涉及57名參與者。所有納入研究的整體偏倚風險均被評為「不明確」。</p>
+            </div>
+        </section>
+
+        <section id="findings" class="pt-16 -mt-16">
+            <h2 class="section-title">主要發現</h2>
+            
+            <div class="content-box">
+                <h3 class="text-xl font-semibold text-teal-700 mb-3">牙齒移動速率</h3>
+                <p class="mb-4">由於納入的研究未直接報告矯正治療的總時長，文獻回顧主要分析了「牙齒移動速率」作為替代結果。結果顯示，在短期內，外科輔助程序似乎能加速牙齒移動：</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="stat-card">
+                        <h4 class="font-semibold text-lg text-teal-600 mb-1">術後1個月牙齒移動量差異</h4>
+                        <p class="text-3xl font-bold text-slate-800">增加 0.61 mm</p>
+                        <p class="text-sm text-slate-600">(95% CI: 0.49 至 0.72 mm; P < 0.001)</p>
+                        <p class="text-xs text-slate-500 mt-1">基於3項RCTs的統合分析</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4 class="font-semibold text-lg text-teal-600 mb-1">術後3個月牙齒移動量差異</h4>
+                        <p class="text-3xl font-bold text-slate-800">增加 2.03 mm</p>
+                        <p class="text-sm text-slate-600">(95% CI: 1.52 至 2.54 mm; P < 0.001)</p>
+                        <p class="text-xs text-slate-500 mt-1">基於2項RCTs的統合分析</p>
+                    </div>
+                </div>
+
+                <p class="mb-4">以下圖表詳細展示了這些發現：</p>
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-center font-medium text-slate-700 mb-2">外科輔助 vs. 傳統治療：術後1個月牙齒移動速率</h4>
+                        <div class="chart-container">
+                            <canvas id="chart1Month"></canvas>
+                        </div>
+                        <p class="text-xs text-center mt-2 text-slate-500">圖表顯示統合平均差異 (Mean Difference) 及其95%信賴區間 (CI)。正值表示外科輔助程序使牙齒移動更多。</p>
+                    </div>
+                    <div>
+                        <h4 class="text-center font-medium text-slate-700 mb-2">外科輔助 vs. 傳統治療：術後3個月牙齒移動速率</h4>
+                        <div class="chart-container">
+                            <canvas id="chart3Months"></canvas>
+                        </div>
+                         <p class="text-xs text-center mt-2 text-slate-500">圖表顯示統合平均差異 (Mean Difference) 及其95%信賴區間 (CI)。正值表示外科輔助程序使牙齒移動更多。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3 class="text-xl font-semibold text-teal-700 mb-3">潛在風險與副作用</h3>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>牙周健康：</strong> 一項研究 (Aboul-Ela 2011) 評估了牙周狀況。術後4個月內，手術側與對照側在菌斑指數、牙周附連喪失、牙齦退縮和探診深度方面無統計學差異。然而，手術側在4個月後的<strong class="text-red-600">牙齦指數評分顯著較高</strong> (P < 0.05)，可能表示牙齦發炎程度增加。</li>
+                    <li><strong>疼痛體驗：</strong> 一項研究 (Alikhani 2013) 評估了疼痛。兩組在矯正器啟動後均報告了較高的不適感，但外科輔助組與對照組之間的疼痛程度無統計學顯著差異。</li>
+                    <li><strong>其他不良反應：</strong> 納入的研究中未報告其他類型的不良反應。然而，任何外科手術本身都帶有潛在風險（如腫脹、感染等），這需要臨床醫師仔細評估。</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h3 class="text-xl font-semibold text-teal-700 mb-3">證據品質</h3>
+                <p class="mb-2">Cochrane 文獻回顧的作者們強調：</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>現有關於外科輔助程序加速矯正治療有效性的研究數量<strong>非常有限</strong>（僅4項RCTs，共57名參與者）。</li>
+                    <li>所有納入研究的整體<strong>偏倚風險均為「不明確」</strong>，這意味著研究結果可能受到研究設計或執行方面的潛在缺陷影響。</li>
+                    <li>基於上述原因，關於牙齒移動速率的證據品質被評為<strong>「低品質」</strong>。這表示未來的研究很可能改變目前對效果的估計。</li>
+                </ul>
+                <p class="mt-4">因此，在解讀這些發現時應保持謹慎。</p>
+            </div>
+        </section>
+
+        <section id="conclusions" class="pt-16 -mt-16">
+            <h2 class="section-title">結論與建議</h2>
+            <div class="content-box">
+                <h3 class="text-xl font-semibold text-teal-700 mb-3">作者結論</h3>
+                <ul class="list-disc list-inside space-y-2 mb-6">
+                    <li>現有低品質證據顯示，外科輔助程序在短期內（術後1至3個月）似乎有加速矯正牙齒移動的潛力。</li>
+                    <li>這些程序或許對臨床有益，但其對整體治療時間的影響尚不清楚，且目前的證據不足以確認其確切益處。</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold text-teal-700 mb-3">對臨床實踐的啟示</h3>
+                <p class="mb-6">臨床醫師在考慮使用這些外科輔助程序時，應謹慎評估現有證據的局限性，並與患者充分溝通潛在的益處、風險和不確定性。</p>
+
+                <h3 class="text-xl font-semibold text-teal-700 mb-3">對未來研究的建議</h3>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>迫切需要更多設計嚴謹、樣本量更大、高品質的隨機對照試驗。</li>
+                    <li>未來的研究應直接評估外科輔助程序對<strong>矯正治療總時長</strong>的影響。</li>
+                    <li>應全面評估並報告所有潛在的不良反應和長期的牙周健康狀況。</li>
+                    <li>納入<strong>患者報告的結果</strong>，如疼痛、不適、滿意度和生活品質。</li>
+                    <li>開發並使用標準化的外科手術方案和核心結果組合，以便於不同研究間的比較。</li>
+                    <li>試驗報告應遵循 CONSORT 等國際報告準則。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="glossary" class="pt-16 -mt-16">
+            <h2 class="section-title">詞彙表</h2>
+            <div class="content-box">
+                <p class="mb-4 text-lg">以下是一些本報告中可能出現的專業術語解釋（源自文獻回顧Table 1）：</p>
+                <div id="glossary-content" class="space-y-3 text-sm">
+                    <div>
+                        <button onclick="toggleGlossaryItem(this)" class="w-full text-left font-semibold text-teal-600 hover:text-teal-700 py-2 border-b border-slate-200 focus:outline-none">
+                            齒槽骨去皮質術 (Alveolar decortication) <span class="float-right transform transition-transform duration-200">&#9662;</span>
+                        </button>
+                        <div class="pt-1 pb-2 text-slate-600 hidden">一種外科手術，故意對齒槽骨造成手術性損傷，旨在加速牙齒移動。此方法已透過添加生物可吸收移植物進行改良 (Wilcko 2001)。</div>
+                    </div>
+                    <div>
+                        <button onclick="toggleGlossaryItem(this)" class="w-full text-left font-semibold text-teal-600 hover:text-teal-700 py-2 border-b border-slate-200 focus:outline-none">
+                            牙齦切開皮質骨鑿孔術 (Corticision) <span class="float-right transform transition-transform duration-200">&#9662;</span>
+                        </button>
+                        <div class="pt-1 pb-2 text-slate-600 hidden">一種相對保守的外科手術，經黏膜切開皮質骨，無需翻開黏骨膜瓣。</div>
+                    </div>
+                    <div>
+                        <button onclick="toggleGlossaryItem(this)" class="w-full text-left font-semibold text-teal-600 hover:text-teal-700 py-2 border-b border-slate-200 focus:outline-none">
+                            牽引成骨術 (Distraction osteogenesis) <span class="float-right transform transition-transform duration-200">&#9662;</span>
+                        </button>
+                        <div class="pt-1 pb-2 text-slate-600 hidden">亦稱骨牽引術。一種用於矯正骨骼畸形的外科手術，以已知的速率延長骨骼。此技術已被改良以促進帶牙骨段的移動。其變體包括：牙周膜牽引術 (PDL distraction) 和牙齒齒槽骨牽引術 (Dento-alveolar distraction)。</div>
+                    </div>
+                     <div>
+                        <button onclick="toggleGlossaryItem(this)" class="w-full text-left font-semibold text-teal-600 hover:text-teal-700 py-2 border-b border-slate-200 focus:outline-none">
+                            區域性加速現象 (Regional Acceleratory Phenomenon - RAP) <span class="float-right transform transition-transform duration-200">&#9662;</span>
+                        </button>
+                        <div class="pt-1 pb-2 text-slate-600 hidden">指組織對有害刺激（如手術創傷）產生的一種生理反應，特徵是該區域的細胞活性和組織重塑速率暫時性增加。在骨骼中，RAP表現為骨吸收和骨形成加速，可能有利於牙齒移動。</div>
+                    </div>
+                    <div>
+                        <button onclick="toggleGlossaryItem(this)" class="w-full text-left font-semibold text-teal-600 hover:text-teal-700 py-2 border-b border-slate-200 focus:outline-none">
+                            微骨穿孔術 (Micro-osteoperforations - MOPs) <span class="float-right transform transition-transform duration-200">&#9662;</span>
+                        </button>
+                        <div class="pt-1 pb-2 text-slate-600 hidden">一種微創手術技術，在牙齒周圍的齒槽骨上製造小型穿孔，旨在引發RAP以加速矯正牙齒移動。通常無需翻開黏骨膜瓣。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz" class="pt-16 -mt-16">
+            <h2 class="section-title">練習測驗</h2>
+            <div class="content-box">
+                <p class="mb-6 text-lg">測試一下您對本篇文獻回顧內容的理解程度吧！</p>
+
+                <div class="quiz-question">
+                    <p class="font-semibold mb-2">1. 根據本 Cochrane 文獻回顧，外科輔助程序對矯正治療總時長的影響為何？</p>
+                    <label class="quiz-option"><input type="radio" name="q1" value="A" class="mr-2"> (A) 顯著縮短了6個月</label>
+                    <label class="quiz-option"><input type="radio" name="q1" value="B" class="mr-2"> (B) 略微縮短了1-2個月</label>
+                    <label class="quiz-option"><input type="radio" name="q1" value="C" class="mr-2"> (C) 未在納入的研究中直接測量</label>
+                    <label class="quiz-option"><input type="radio" name="q1" value="D" class="mr-2"> (D) 顯著增加了治療複雜性</label>
+                    <button onclick="showAnswer('q1_answer', 'C')" class="mt-2 px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 text-sm">顯示答案</button>
+                    <div id="q1_answer" class="quiz-answer hidden">正確答案：(C) 未在納入的研究中直接測量。文獻回顧指出，主要結果（整體治療時長）未被直接測量。</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="font-semibold mb-2">2. 在本 Cochrane 文獻回顧中，評估外科輔助程序加速牙齒移動的證據品質被評為：</p>
+                    <label class="quiz-option"><input type="radio" name="q2" value="A" class="mr-2"> (A) 高品質</label>
+                    <label class="quiz-option"><input type="radio" name="q2" value="B" class="mr-2"> (B) 中等品質</label>
+                    <label class="quiz-option"><input type="radio" name="q2" value="C" class="mr-2"> (C) 低品質</label>
+                    <label class="quiz-option"><input type="radio" name="q2" value="D" class="mr-2"> (D) 非常低品質</label>
+                    <button onclick="showAnswer('q2_answer', 'C')" class="mt-2 px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 text-sm">顯示答案</button>
+                    <div id="q2_answer" class="quiz-answer hidden">正確答案：(C) 低品質。由於研究數量有限且偏倚風險不明確，證據品質被評為低。</div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="font-semibold mb-2">3. 關於外科輔助程序的潛在風險，本 Cochrane 文獻回顧中的一項研究發現了以下哪種情況？</p>
+                    <label class="quiz-option"><input type="radio" name="q3" value="A" class="mr-2"> (A) 手術側牙根吸收顯著增加</label>
+                    <label class="quiz-option"><input type="radio" name="q3" value="B" class="mr-2"> (B) 手術側4個月後牙齦指數評分顯著較高</label>
+                    <label class="quiz-option"><input type="radio" name="q3" value="C" class="mr-2"> (C) 患者術後疼痛感明顯高於傳統治療組</label>
+                    <label class="quiz-option"><input type="radio" name="q3" value="D" class="mr-2"> (D) 無任何牙周相關不良反應</label>
+                    <button onclick="showAnswer('q3_answer', 'B')" class="mt-2 px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 text-sm">顯示答案</button>
+                    <div id="q3_answer" class="quiz-answer hidden">正確答案：(B) 手術側4個月後牙齦指數評分顯著較高。這是一項研究 (Aboul-Ela 2011) 中關於牙周健康的發現。</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 text-center py-6 mt-12">
+        <p class="text-sm">本互動報告內容基於 Fleming PS et al. (2015) Cochrane 系統性文獻回顧。</p>
+        <p class="text-xs mt-1">僅供學術參考，不構成醫療建議。</p>
+    </footer>
+
+    <script>
+        // Navigation toggle for mobile
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu after click
+                    if (navMenu && !navMenu.classList.contains('md:flex')) {
+                         navMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Chart.js configuration
+        const commonChartOptions = {
+            indexAxis: 'y', // Horizontal bar chart
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '牙齒移動量差異 (mm) - 外科輔助 vs. 傳統治療',
+                        font: { size: 12, family: "'Noto Sans TC', sans-serif" }
+                    },
+                    ticks: { font: { family: "'Noto Sans TC', sans-serif" } }
+                },
+                y: {
+                    ticks: { 
+                        font: { size: 12, family: "'Noto Sans TC', sans-serif" },
+                        // Custom function to wrap long labels
+                        callback: function(value) {
+                            const label = this.getLabelForValue(value);
+                            if (label.length > 16) { // Max length before trying to split
+                                const words = label.split(' ');
+                                let lines = [''];
+                                let currentLine = 0;
+                                words.forEach(word => {
+                                    if ((lines[currentLine] + word).length > 16 && lines[currentLine] !== '') {
+                                        currentLine++;
+                                        lines[currentLine] = '';
+                                    }
+                                    lines[currentLine] += word + ' ';
+                                });
+                                return lines.map(line => line.trim());
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // Data is clear from axis and title
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.x !== null) {
+                                label += context.parsed.x.toFixed(2) + ' mm';
+                                // Add CI to tooltip
+                                const ci = context.dataset.ciData[context.dataIndex];
+                                if(ci) {
+                                   label += ` (95% CI: ${ci.lower.toFixed(2)} to ${ci.upper.toFixed(2)})`;
+                                }
+                            }
+                            return label;
+                        }
+                    },
+                    titleFont: { family: "'Noto Sans TC', sans-serif" },
+                    bodyFont: { family: "'Noto Sans TC', sans-serif" }
+                }
+            }
+        };
+
+        // Data for Chart 1 (1 Month) - Based on Analysis 1.1
+        const data1Month = {
+            labels: ['統合結果 (Pooled)'], 
+            datasets: [{
+                label: '術後1個月牙齒移動量差異',
+                data: [0.61],
+                backgroundColor: ['rgba(20, 184, 166, 0.6)'], 
+                borderColor: ['rgba(13, 148, 136, 1)'], 
+                borderWidth: 1,
+                ciData: [ { lower: 0.49, upper: 0.72 } ]
+            }]
+        };
+        const chart1MonthCtx = document.getElementById('chart1Month')?.getContext('2d');
+        if (chart1MonthCtx) {
+            new Chart(chart1MonthCtx, {
+                type: 'bar',
+                data: data1Month,
+                options: commonChartOptions
+            });
+        }
+
+        // Data for Chart 2 (3 Months) - Based on Analysis 1.2
+         const data3Months = {
+            labels: ['統合結果 (Pooled)'], 
+            datasets: [{
+                label: '術後3個月牙齒移動量差異',
+                data: [2.03],
+                backgroundColor: ['rgba(20, 184, 166, 0.6)'],
+                borderColor: ['rgba(13, 148, 136, 1)'],
+                borderWidth: 1,
+                ciData: [ { lower: 1.52, upper: 2.54 } ]
+            }]
+        };
+        const chart3MonthsCtx = document.getElementById('chart3Months')?.getContext('2d');
+        if (chart3MonthsCtx) {
+            new Chart(chart3MonthsCtx, {
+                type: 'bar',
+                data: data3Months,
+                options: commonChartOptions
+            });
+        }
+
+        // Glossary toggle
+        function toggleGlossaryItem(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('span');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Quiz answer toggle
+        function showAnswer(answerId, correctAnswerValue) {
+            // Hide all answers first
+            document.querySelectorAll('.quiz-answer').forEach(ans => {
+                if(ans.id !== answerId) ans.classList.add('hidden');
+            });
+            // Toggle the selected answer
+            const answerDiv = document.getElementById(answerId);
+            if (answerDiv) {
+                answerDiv.classList.toggle('hidden');
+            }
+        }
+
+    </script>
+</body>
+</html>
